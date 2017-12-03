@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: cb4842328c15b5a4684f2a69e495895d
+timeCreated: 1510695793
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: THE GLITCH MOB
+  fontNames:
+  - THE GLITCH MOB
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
