@@ -2,16 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreMaster
+public static class ScoreMaster
 {
-    // Return a list of individual frame scores, NOT cumulative
+    // Return a list of individual frame scores.
     public static List<int> ScoreFrames(List<int> rolls)
     {
-        List<int> frameList = new List<int>();
+        List<int> frames = new List<int>();
 
-        // Code
+        // Index i pints to 2nd bowl of frame
+        for (int i = 1; i < rolls.Count; i += 2)
+        {   
+            if (frames.Count == 10)  // Prevents 11th frame score
+            {
+                break;
+            }
 
-        return frameList;
+            if (rolls[i - 1] + rolls[i] < 10)  // Normal OPEN frame
+            {
+                frames.Add(rolls[i - 1] + rolls[i]);
+            }
+
+            if (rolls.Count - i <= 1)  // Insufficient look-ahead
+            {
+                break;
+            }
+
+            if (rolls[i - 1] == 10)     // STRIKE frame has just one bowl
+            {
+                i--;
+                frames.Add(10 + rolls[i + 1] + rolls[i + 2]);
+            }
+            else if (rolls[i - 1] + rolls[i] == 10)  // Calculate SPARE bonus
+            {
+                frames.Add(10 + rolls[i + 1]);
+            }
+        }
+
+        return frames;
     }
     // Return a list of cumulative scores, like a normal scored card
     public static List<int>ScoreCumulative(List<int> rolls)
