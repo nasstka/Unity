@@ -6,10 +6,11 @@ public class Player : MonoBehaviour
 {
     // The parent of spawn points
     public Transform playerSpawnPoints;
-    public bool reSpawn = false;
+    public GameObject landingAreaPrefab;
 
+    private bool reSpawn = false;
     private Transform[] spawnPoints;
-    private bool lastToggle = false;
+    private bool lastRespawnToggle = false;
 
     void Start()
     {
@@ -19,21 +20,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lastToggle != reSpawn)
+        if (lastRespawnToggle != reSpawn)
         {
             Respawn();
             reSpawn = false;
         }
         else
         {
-            lastToggle = reSpawn;
+            lastRespawnToggle = reSpawn;
         }
     }
 
     private void Respawn()
     {
         int indx = Random.Range(1, spawnPoints.Length);
-
         transform.position = spawnPoints[indx].transform.position;
+    }
+
+    void OnFindClearArea()
+    {
+        Invoke("DropFlare", 3f);
+    }
+
+    void DropFlare()
+    {
+        Vector3 flarePosition = new Vector3(transform.position.x, 50f, transform.position.z);
+        Instantiate(landingAreaPrefab, flarePosition, transform.rotation);
     }
 }
